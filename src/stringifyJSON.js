@@ -3,21 +3,75 @@
 
 // but you don't so you're going to write it from scratch:
 
+
+
+
+var stringifyJSON = function(obj) {
+  var stringify = function(item) {
+    
+    
+    
+    
+    
+    
+    
+    
+  };
+};
+
+
+
 var stringifyJSON = function(obj) {
   // your code goes here
   // deal with array
   //if array stringifyJSON(obj[0])
-  if (Array.isArray(obj)) {
-    // var arrResults = '[' + 1 + 'cat' + true + ']';
-    // for (var i = 0; i < obj.length; i++) {
-      
-    // }
+  // "[" + x , y , z + "]"
+  console.log(obj);
+  if (Array.isArray(obj)) { 
     // return '[' + arrResults + ']';
     return '[' + obj.map(function(item) {
       return stringifyJSON(item);
     }) + ']';
   }
-  // deal with objects
+  if (typeof obj === 'object' && obj !== null) {
+    var objResults = Object.keys(obj);
+    // var thing = '{' + objResults.map(function(prop) {
+    //   if (typeof prop !== 'undefined' && 
+    //       prop !== undefined && 
+    //       typeof obj[prop] !== 'undefined' && 
+    //       obj[prop] !== undefined && 
+    //       typeof prop !== 'function' && 
+    //       typeof obj[prop] !== 'function') {
+    //     return stringifyJSON(prop) + ':' + stringifyJSON(obj[prop]);
+    //   } else {
+    //     return;
+    //   }
+    // }) + '}'; 
+    
+    var test = objResults.map(function(prop) {
+      if (typeof prop !== 'undefined' && 
+          prop !== undefined && 
+          typeof obj[prop] !== 'undefined' && 
+          obj[prop] !== undefined && 
+          typeof prop !== 'function' && 
+          typeof obj[prop] !== 'function') {
+        return stringifyJSON(prop) + ':' + stringifyJSON(obj[prop]);
+      } else {
+        return;
+      }
+    }); 
+    console.log(' x ', test);
+    if (test.length > 0) {
+      test = test.reduce(function(x) {
+        if (x !== 'undefined') {
+          return x;
+        }
+      });
+    }
+    console.log(' y ', test);
+    return '{' + test + '}';
+    // return thing;
+  }
 
   // deal with primatives
   if (typeof obj === 'string') {
